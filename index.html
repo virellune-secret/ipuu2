@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
             overflow: hidden;
         }
 
@@ -26,572 +26,654 @@
         }
 
         .slide {
+            width: 100%;
+            height: 100%;
             display: none;
-            padding: 40px;
-            height: 100vh;
-            display: flex;
             flex-direction: column;
             justify-content: center;
-            animation: slideIn 0.5s ease-in-out;
+            align-items: center;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow-y: auto;
         }
 
         .slide.active {
             display: flex;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .slide h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
+        .slide-header {
             text-align: center;
-            background: linear-gradient(45deg, #fff, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 1rem;
+            width: 100%;
         }
 
-        .slide h2 {
-            font-size: 2.8rem;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #ffd700;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .slide h3 {
-            font-size: 2.2rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: #87ceeb;
-            border-bottom: 3px solid #ffd700;
-            display: inline-block;
-            padding-bottom: 5px;
+        .slide-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
         }
 
-        .slide p, .slide li {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            text-align: justify;
-            color: #f0f8ff;
+        .slide-content {
+            flex: 1;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .slide ul {
-            list-style: none;
-            padding-left: 0;
+        .content-section {
+            margin-bottom: 2rem;
+            background: linear-gradient(145deg, #f8f9ff, #e8ecff);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
         }
 
-        .slide li {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 12px;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
         }
 
-        .slide li::before {
+        .section-title::before {
             content: "▶";
+            margin-right: 0.5rem;
+            color: #764ba2;
+        }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .content-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .content-list li::before {
+            content: "●";
+            color: #667eea;
             position: absolute;
             left: 0;
-            color: #ffd700;
-            font-weight: bold;
+            top: 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #e17055;
+            font-weight: 500;
         }
 
         .navigation {
             position: fixed;
-            bottom: 20px;
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 1rem;
             z-index: 1000;
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #ffd700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 12px 24px;
-            cursor: pointer;
+            border: none;
+            padding: 0.8rem 1.5rem;
             border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
+            cursor: pointer;
+            font-weight: bold;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .nav-btn:hover {
-            background: #ffd700;
-            color: #1e3c72;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .slide-counter {
             position: fixed;
-            bottom: 20px;
-            right: 30px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 8px 16px;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255,255,255,0.9);
+            padding: 0.5rem 1rem;
             border-radius: 20px;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            color: #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-align: center;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
         }
 
-        .subtitle {
-            font-size: 1.8rem;
-            color: #87ceeb;
-            margin-bottom: 40px;
-            font-weight: 300;
+        .title-slide .slide-title {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .title-slide .slide-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
         }
 
         .author-info {
-            font-size: 1.3rem;
-            color: #ffd700;
-            margin-top: 40px;
-        }
-
-        .content-slide {
-            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
-        }
-
-        .highlight-box {
-            background: rgba(255, 215, 0, 0.1);
-            border-left: 5px solid #ffd700;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
-        }
-
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: start;
-        }
-
-        .conclusion-box {
-            background: rgba(135, 206, 235, 0.1);
-            border: 2px solid #87ceeb;
-            padding: 25px;
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
             border-radius: 15px;
-            margin: 20px 0;
-            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #f8f9ff;
         }
 
         @media (max-width: 768px) {
-            .slide h1 { font-size: 2.5rem; }
-            .slide h2 { font-size: 2rem; }
-            .slide h3 { font-size: 1.8rem; }
-            .slide p, .slide li { font-size: 1.2rem; }
-            .slide { padding: 20px; }
-            .two-column { grid-template-columns: 1fr; }
+            .slide-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .slide {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Slide 1: Judul -->
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+        </div>
+
+        <!-- Slide 1: Title -->
         <div class="slide active title-slide">
-            <h1>Perlindungan Hukum Terhadap Atlet</h1>
-            <p class="subtitle">Analisis Komparatif Perspektif Hukum Nasional dan Lex Sportiva dalam Kasus Cedera atau Kematian Atlet pada Pertandingan</p>
-            <div class="author-info">
-                <p>Penelitian Hukum Yuridis-Normatif</p>
-                <p>Metode Komparatif-Normatif</p>
-            </div>
-        </div>
-
-        <!-- Slide 2: Latar Belakang -->
-        <div class="slide content-slide">
-            <h2>Latar Belakang Masalah</h2>
-            <ul>
-                <li>Olahraga merupakan aktivitas berisiko tinggi yang dapat mengakibatkan cedera serius atau kematian atlet</li>
-                <li>Atlet memiliki status hukum ganda: sebagai warga negara Indonesia dan peserta kompetisi olahraga internasional</li>
-                <li>Terdapat dualisme yurisdiksi antara hukum nasional Indonesia dan lex sportiva dalam memberikan perlindungan hukum</li>
-                <li>Belum adanya analisis komprehensif mengenai integrasi kedua sistem hukum untuk perlindungan optimal atlet</li>
-            </ul>
-            <div class="highlight-box">
-                <p><strong>Permasalahan Utama:</strong> Bagaimana bentuk perlindungan hukum terhadap atlet di Indonesia menurut perspektif hukum nasional dan lex sportiva?</p>
-            </div>
-        </div>
-
-        <!-- Slide 3: Metode Penelitian -->
-        <div class="slide content-slide">
-            <h2>Metode Penelitian</h2>
-            <div class="two-column">
-                <div>
-                    <h3>Jenis Penelitian</h3>
-                    <ul>
-                        <li>Penelitian hukum yuridis-normatif</li>
-                        <li>Pendekatan komparatif-normatif</li>
-                        <li>Analisis perbandingan sistem hukum</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Logika Penalaran</h3>
-                    <ul>
-                        <li>Penalaran deduktif-konstitusional</li>
-                        <li>Penalaran induktif-empiris</li>
-                        <li>Penalaran teleologis</li>
-                        <li>Penalaran dialektis</li>
-                    </ul>
+            <div class="slide-content">
+                <h1 class="slide-title">PERLINDUNGAN HUKUM ATLET</h1>
+                <p class="slide-subtitle">Perspektif Hukum Nasional Indonesia dan Lex Sportiva</p>
+                <div class="author-info">
+                    <h3>BAB III - PEMBAHASAN</h3>
+                    <p>Analisis Komparatif Sistem Perlindungan Hukum</p>
                 </div>
             </div>
-            <div class="highlight-box">
-                <p><strong>Kerangka Analisis:</strong> Sistem Hukum Nasional + Lex Sportiva → Analisis Perbandingan → Identifikasi Celah/Tumpang Tindih → Evaluasi Efektivitas Perlindungan</p>
+        </div>
+
+        <!-- Slide 2: Outline -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">GARIS BESAR PEMBAHASAN</h1>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">Ruang Lingkup Pembahasan</h2>
+                    <ul class="content-list">
+                        <li>Perlindungan Hukum Atlet Menurut Perspektif Hukum Nasional Indonesia</li>
+                        <li>Perlindungan Hukum Atlet Menurut Perspektif Lex Sportiva</li>
+                        <li>Analisis Komparatif: Integrasi dan Komplementaritas Sistem Perlindungan</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>Fokus Utama:</strong> Menganalisis bagaimana kedua sistem hukum dapat bekerja secara sinergis untuk memberikan perlindungan optimal bagi atlet Indonesia
+                </div>
             </div>
         </div>
 
-        <!-- Slide 4: Landasan Konstitusional -->
-        <div class="slide content-slide">
-            <h2>Landasan Konstitusional Perlindungan Atlet</h2>
-            <h3>Jaminan UUD 1945</h3>
-            <ul>
-                <li><strong>Pasal 28A:</strong> Hak untuk hidup dan mempertahankan hidup - memberikan dasar perlindungan keselamatan atlet</li>
-                <li><strong>Pasal 28G ayat (1):</strong> Hak atas perlindungan diri pribadi dan rasa aman - menjamin atlet bebas dari ancaman cedera yang dapat dicegah</li>
-                <li><strong>Pasal 28H ayat (1):</strong> Hak atas kesehatan dan lingkungan sehat - menjamin pelayanan kesehatan memadai</li>
-                <li><strong>Pasal 28H ayat (3):</strong> Hak atas jaminan sosial - memberikan landasan kompensasi dan rehabilitasi</li>
-            </ul>
-        </div>
-
-        <!-- Slide 5: Kerangka Statutory -->
-        <div class="slide content-slide">
-            <h2>Kerangka Perundang-undangan</h2>
-            <div class="two-column">
-                <div>
-                    <h3>UU Sistem Keolahragaan Nasional</h3>
-                    <ul>
-                        <li>Pasal 81: Kewajiban menjamin keselamatan peserta</li>
-                        <li>Pasal 82: Penyediaan fasilitas kesehatan memadai</li>
-                    </ul>
-                    
-                    <h3>UU Kesehatan</h3>
-                    <ul>
-                        <li>Pasal 165: Upaya kesehatan di tempat kerja</li>
-                        <li>Pasal 32: Pelayanan kesehatan darurat</li>
+        <!-- Slide 3: Landasan Konstitusional -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">LANDASAN KONSTITUSIONAL</h1>
+                <p class="slide-subtitle">Perlindungan Hukum Atlet dalam UUD 1945</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">Pasal 28A UUD 1945</h2>
+                    <ul class="content-list">
+                        <li>Jaminan hak hidup dan mempertahankan kehidupan</li>
+                        <li>Dasar konstitusional perlindungan keselamatan atlet</li>
+                        <li>Kewajiban negara memastikan standar keselamatan memadai</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>UU Ketenagakerjaan</h3>
-                    <ul>
-                        <li>Pasal 86: Hak perlindungan K3 untuk atlet profesional</li>
-                        <li>Pasal 87: Sistem manajemen keselamatan</li>
+                <div class="content-section">
+                    <h2 class="section-title">Pasal 28G Ayat (1) UUD 1945</h2>
+                    <ul class="content-list">
+                        <li>Perlindungan diri pribadi dan rasa aman</li>
+                        <li>Hak atlet atas perlindungan dari risiko cedera yang dapat dicegah</li>
+                        <li>Jaminan keamanan dalam menjalankan profesi olahraga</li>
                     </ul>
-                    
-                    <h3>UU Jaminan Sosial</h3>
-                    <ul>
-                        <li>Program JKK melalui BPJS Ketenagakerjaan</li>
-                        <li>Santunan kecelakaan kerja dan cacat</li>
+                </div>
+                <div class="content-section">
+                    <h2 class="section-title">Pasal 28H UUD 1945</h2>
+                    <ul class="content-list">
+                        <li>Hak atas pelayanan kesehatan dan lingkungan sehat</li>
+                        <li>Jaminan sosial untuk pengembangan diri yang bermartabat</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 6: Lex Sportiva -->
-        <div class="slide content-slide">
-            <h2>Konsep Lex Sportiva</h2>
-            <h3>Definisi dan Ruang Lingkup</h3>
-            <p>Lex Sportiva merupakan tatanan hukum otonom dalam dunia olahraga internasional yang terdiri dari prinsip, aturan, dan regulasi yang diciptakan oleh organisasi olahraga internasional untuk mengatur berbagai aspek aktivitas olahraga, termasuk perlindungan atlet.</p>
-            
-            <div class="two-column">
-                <div>
-                    <h3>Sumber Hukum</h3>
-                    <ul>
-                        <li>Piagam Olimpiade (Olympic Charter)</li>
-                        <li>Regulasi federasi internasional</li>
-                        <li>Putusan Court of Arbitration for Sport</li>
-                        <li>Prinsip-prinsip umum hukum olahraga</li>
+        <!-- Slide 4: Kerangka Statutory -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">KERANGKA PERUNDANG-UNDANGAN</h1>
+                <p class="slide-subtitle">Implementasi Jaminan Konstitusional</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">UU No. 3 Tahun 2005 tentang Sistem Keolahragaan Nasional</h2>
+                    <ul class="content-list">
+                        <li><strong>Pasal 81:</strong> Kewajiban penyelenggara menjamin keselamatan peserta</li>
+                        <li><strong>Pasal 82:</strong> Wajib menyediakan fasilitas kesehatan dan tenaga medis</li>
+                        <li>Menciptakan kewajiban hukum yang dapat dituntut secara legal</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>Karakteristik Utama</h3>
-                    <ul>
-                        <li>Otonomi dari sistem hukum nasional</li>
-                        <li>Spesialisasi dalam isu olahraga</li>
-                        <li>Penyelesaian sengketa khusus</li>
-                        <li>Standar keselamatan internasional</li>
+                <div class="content-section">
+                    <h2 class="section-title">UU No. 36 Tahun 2009 tentang Kesehatan</h2>
+                    <ul class="content-list">
+                        <li><strong>Pasal 165:</strong> Upaya kesehatan di tempat kerja</li>
+                        <li><strong>Pasal 32:</strong> Pelayanan kesehatan darurat</li>
+                        <li>Hak atas perawatan medis segera tanpa diskriminasi</li>
                     </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>Catatan Penting:</strong> Kerangka statutory memberikan dasar legal yang kuat untuk menuntut perlindungan atlet
                 </div>
             </div>
         </div>
 
-        <!-- Slide 7: Standar Keselamatan Lex Sportiva -->
-        <div class="slide content-slide">
-            <h2>Standar Keselamatan dalam Lex Sportiva</h2>
-            <h3>Regulasi Medis Federasi Internasional</h3>
-            <div class="two-column">
-                <div>
-                    <h3>FIFA Medical Regulations</h3>
-                    <ul>
-                        <li>Kehadiran wajib tenaga medis berkualifikasi</li>
+        <!-- Slide 5: Perlindungan Atlet Profesional -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">PERLINDUNGAN ATLET PROFESIONAL</h1>
+                <p class="slide-subtitle">Konteks Ketenagakerjaan</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">UU No. 13 Tahun 2003 tentang Ketenagakerjaan</h2>
+                    <ul class="content-list">
+                        <li><strong>Pasal 86:</strong> Hak atas perlindungan keselamatan dan kesehatan kerja</li>
+                        <li><strong>Pasal 87:</strong> Kewajiban menerapkan sistem manajemen K3</li>
+                        <li><strong>Pasal 99:</strong> Jaminan sosial tenaga kerja</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h2 class="section-title">Tantangan Implementasi</h2>
+                    <ul class="content-list">
+                        <li>Kompleksitas mengkategorikan atlet sebagai "pekerja"</li>
+                        <li>Perbedaan sifat pertunjukan atletik dengan pekerjaan tradisional</li>
+                        <li>Risiko inheren yang tidak dapat sepenuhnya dieliminasi</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>Prinsip Kunci:</strong> Meski risiko inheren ada, kewajiban meminimalkan risiko yang tidak perlu tetap berlaku
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Sistem Jaminan Sosial -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">SISTEM JAMINAN SOSIAL</h1>
+                <p class="slide-subtitle">SJSN dan BPJS untuk Atlet</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">Program Jaminan Kecelakaan Kerja (JKK)</h2>
+                    <ul class="content-list">
+                        <li>Pelayanan kesehatan sesuai kebutuhan medis</li>
+                        <li>Santunan sementara tidak mampu bekerja</li>
+                        <li>Santunan cacat sebagian atau total</li>
+                        <li>Santunan kematian dan biaya pemakaman</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h2 class="section-title">Tantangan dan Solusi</h2>
+                    <ul class="content-list">
+                        <li><strong>Masalah:</strong> Kategorisasi status ketenagakerjaan atlet</li>
+                        <li><strong>Solusi:</strong> Skema asuransi khusus untuk atlet</li>
+                        <li>Diperlukan ketentuan khusus untuk karakteristik unik karier atletik</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>Penting:</strong> Sistem SJSN perlu adaptasi khusus untuk mengakomodasi kebutuhan unik atlet
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Lex Sportiva -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">LEX SPORTIVA</h1>
+                <p class="slide-subtitle">Sistem Hukum Olahraga Internasional</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">Konsep Dasar</h2>
+                    <ul class="content-list">
+                        <li>Tatanan hukum otonom dalam dunia olahraga internasional</li>
+                        <li>Prinsip, aturan, dan regulasi organisasi olahraga internasional</li>
+                        <li>Olympic Charter sebagai dokumen foundational</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h2 class="section-title">Organisasi Utama</h2>
+                    <ul class="content-list">
+                        <li><strong>IOC:</strong> International Olympic Committee</li>
+                        <li><strong>FIFA:</strong> Federasi sepak bola dunia</li>
+                        <li><strong>World Athletics:</strong> Federasi atletik dunia</li>
+                        <li><strong>CAS:</strong> Court of Arbitration for Sport</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>Keunggulan:</strong> Standar keselamatan yang lebih canggih dan spesifik olahraga
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Standar Keselamatan Internasional -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">STANDAR KESELAMATAN INTERNASIONAL</h1>
+                <p class="slide-subtitle">Best Practices dalam Lex Sportiva</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">FIFA Medical Regulations</h2>
+                    <ul class="content-list">
+                        <li>Kehadiran wajib tenaga medis terlatih</li>
                         <li>Peralatan medis darurat lengkap</li>
-                        <li>Protokol penanganan cedera pemain</li>
-                        <li>Komunikasi langsung dengan rumah sakit</li>
+                        <li>Protokol penanganan pemain cedera</li>
+                        <li>Komunikasi langsung dengan rumah sakit terdekat</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>World Athletics Medical Manual</h3>
-                    <ul>
-                        <li>Jumlah minimum personel medis</li>
-                        <li>Jenis peralatan medis wajib</li>
-                        <li>Protokol keadaan darurat medis</li>
-                        <li>Standar berdasarkan bukti ilmiah</li>
+                <div class="content-section">
+                    <h2 class="section-title">Olympic Games Medical Standards</h2>
+                    <ul class="content-list">
+                        <li>Poliklinik komprehensif di Olympic Village</li>
+                        <li>Layanan medis darurat 24/7</li>
+                        <li>Fasilitas kedokteran olahraga khusus</li>
+                        <li>Standar emas untuk kompetisi internasional</li>
                     </ul>
                 </div>
-            </div>
-            <div class="highlight-box">
-                <p><strong>Prinsip Utama:</strong> Organisasi olahraga memiliki kewajiban untuk memberikan perlindungan (duty of care) kepada atlet berdasarkan standar internasional terbaik.</p>
-            </div>
-        </div>
-
-        <!-- Slide 8: Asuransi dan Tanggung Jawab -->
-        <div class="slide content-slide">
-            <h2>Sistem Asuransi dan Kerangka Tanggung Jawab</h2>
-            <h3>Persyaratan Asuransi Wajib</h3>
-            <ul>
-                <li><strong>FIFA:</strong> Klub wajib memiliki asuransi memadai untuk pemain, termasuk biaya medis dan santunan cacat</li>
-                <li><strong>UEFA:</strong> Asuransi komprehensif dengan jumlah minimum yang ditetapkan dalam regulasi</li>
-                <li><strong>IOC:</strong> Standar asuransi emas untuk Olimpiade dengan fasilitas medis 24/7</li>
-            </ul>
-            
-            <div class="two-column">
-                <div>
-                    <h3>Kerangka Tanggung Jawab Ketat</h3>
-                    <ul>
-                        <li>Tanggung jawab tanpa kesalahan</li>
-                        <li>Beban risiko pada penyelenggara</li>
-                        <li>Kompensasi otomatis untuk cedera</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Asumsi Risiko</h3>
-                    <ul>
-                        <li>Atlet menerima risiko inheren</li>
-                        <li>Pembedaan risiko dapat diterima vs kelalaian</li>
-                        <li>Peringatan dan persetujuan yang memadai</li>
+                <div class="content-section">
+                    <h2 class="section-title">FINA Water Safety Protocols</h2>
+                    <ul class="content-list">
+                        <li>Penjaga pantai bersertifikat wajib</li>
+                        <li>Sistem monitoring bawah air</li>
+                        <li>Akses langsung ke peralatan resusitasi</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 9: Analisis Komparatif -->
-        <div class="slide content-slide">
-            <h2>Analisis Komparatif: Celah dan Tumpang Tindih</h2>
-            <div class="two-column">
-                <div>
-                    <h3>Kekuatan Hukum Nasional</h3>
-                    <ul>
-                        <li>Jaminan konstitusional yang kuat</li>
-                        <li>Mekanisme penegakan hukum</li>
-                        <li>Jaring pengaman sosial luas</li>
-                        <li>Dukungan jangka panjang melalui BPJS</li>
-                    </ul>
-                    
-                    <h3>Kelemahan Hukum Nasional</h3>
-                    <ul>
-                        <li>Standar keselamatan umum (tidak spesifik olahraga)</li>
-                        <li>Implementasi yang lemah</li>
-                        <li>Akses prosedural yang kompleks</li>
+        <!-- Slide 9: Perbandingan Sistem -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">PERBANDINGAN SISTEM</h1>
+                <p class="slide-subtitle">Hukum Nasional vs Lex Sportiva</p>
+            </div>
+            <div class="slide-content">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Hukum Nasional Indonesia</th>
+                            <th>Lex Sportiva</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Standar Keselamatan</strong></td>
+                            <td>Umum, tidak spesifik olahraga</td>
+                            <td>Canggih, spesifik per cabang olahraga</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penegakan Hukum</strong></td>
+                            <td>Kuat melalui sistem peradilan nasional</td>
+                            <td>Bergantung pada kepatuhan sukarela</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jaminan Sosial</strong></td>
+                            <td>Komprehensif melalui BPJS</td>
+                            <td>Terbatas, spesifik kompetisi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cakupan Asuransi</strong></td>
+                            <td>Jangka panjang, dukungan sosial</td>
+                            <td>Khusus olahraga, kompensasi tinggi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penyelesaian Sengketa</strong></td>
+                            <td>Pengadilan umum</td>
+                            <td>CAS dan arbitrase khusus</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 10: Gap dan Overlap -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">IDENTIFIKASI GAP DAN OVERLAP</h1>
+                <p class="slide-subtitle">Analisis Kelemahan dan Kelebihan</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">Gap dalam Sistem</h2>
+                    <ul class="content-list">
+                        <li><strong>Hukum Nasional:</strong> Kurang spesifik untuk risiko olahraga</li>
+                        <li><strong>Lex Sportiva:</strong> Penegakan hukum terbatas</li>
+                        <li>Koordinasi antar sistem masih lemah</li>
+                        <li>Tidak ada standar terpadu untuk semua tingkat kompetisi</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>Kekuatan Lex Sportiva</h3>
-                    <ul>
-                        <li>Standar keselamatan canggih dan spesifik</li>
-                        <li>Keahlian khusus kedokteran olahraga</li>
-                        <li>Penyelesaian sengketa efisien</li>
-                        <li>Asuransi komprehensif untuk kebutuhan atlet</li>
+                <div class="content-section">
+                    <h2 class="section-title">Overlap Positif</h2>
+                    <ul class="content-list">
+                        <li>Keduanya mengakui pentingnya perlindungan atlet</li>
+                        <li>Prinsip tanggung jawab penyelenggara</li>
+                        <li>Kompensasi untuk cedera dan kematian</li>
+                        <li>Standar perawatan medis darurat</li>
                     </ul>
-                    
-                    <h3>Kelemahan Lex Sportiva</h3>
-                    <ul>
-                        <li>Penegakan bergantung kepatuhan sukarela</li>
-                        <li>Cakupan terbatas pada level kompetisi tertentu</li>
-                        <li>Kurang dukungan sosial jangka panjang</li>
-                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>Peluang:</strong> Integrasi kedua sistem dapat menciptakan perlindungan yang lebih kuat dan komprehensif
                 </div>
             </div>
         </div>
 
-        <!-- Slide 10: Model Integrasi Optimal -->
-        <div class="slide content-slide">
-            <h2>Model Integrasi Optimal</h2>
-            <h3>Kerangka Perlindungan Terpadu</h3>
-            <div class="highlight-box">
-                <p><strong>Konsep Dasar:</strong> Menggabungkan jaminan konstitusional dan jaring pengaman sosial hukum nasional dengan keahlian khusus dan standar internasional lex sportiva</p>
+        <!-- Slide 11: Model Integrasi Optimal -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">MODEL INTEGRASI OPTIMAL</h1>
+                <p class="slide-subtitle">Menuju Perlindungan Atlet Terpadu</p>
             </div>
-            
-            <div class="two-column">
-                <div>
-                    <h3>Integrasi Asuransi</h3>
-                    <ul>
-                        <li>Partisipasi wajib dalam sistem jaminan sosial nasional</li>
-                        <li>Asuransi tambahan khusus olahraga</li>
-                        <li>Pembagian premi antara atlet, organisasi, sponsor, dan subsidi pemerintah</li>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">Kerangka Hukum Terpadu</h2>
+                    <ul class="content-list">
+                        <li>UU Perlindungan Atlet yang komprehensif</li>
+                        <li>Integrasi dengan sistem jaminan sosial nasional</li>
+                        <li>Adopsi standar internasional sebagai regulasi nasional</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>Integrasi Kelembagaan</h3>
-                    <ul>
-                        <li>Pengadilan khusus olahraga atau kamar khusus</li>
-                        <li>Penerapan hukum nasional dan prinsip lex sportiva</li>
-                        <li>Koneksi dengan CAS dan mekanisme internasional</li>
+                <div class="content-section">
+                    <h2 class="section-title">Model Asuransi Ganda</h2>
+                    <ul class="content-list">
+                        <li>Asuransi sosial nasional sebagai dasar</li>
+                        <li>Asuransi khusus olahraga sebagai pelengkap</li>
+                        <li>Pembagian premi antara atlet, organisasi, dan pemerintah</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <!-- Slide 11: Harmonisasi Standar -->
-        <div class="slide content-slide">
-            <h2>Harmonisasi Standar Keselamatan</h2>
-            <h3>Strategi Implementasi</h3>
-            <ul>
-                <li><strong>Adopsi Standar Internasional:</strong> Mengadopsi dan mengadaptasi standar keselamatan federasi olahraga internasional untuk kompetisi domestik</li>
-                <li><strong>Pengembangan Kapasitas Nasional:</strong> Pelatihan tenaga medis kedokteran olahraga dan peningkatan fasilitas</li>
-                <li><strong>Pusat Kedokteran Olahraga:</strong> Pengembangan pusat-pusat yang memenuhi standar internasional</li>
-                <li><strong>Standardisasi Protokol Medis:</strong> Protokol medis konsisten di semua tingkat kompetisi</li>
-            </ul>
-            
-            <div class="highlight-box">
-                <p><strong>Tujuan:</strong> Memastikan tingkat perlindungan konsisten terlepas dari tingkat kompetisi atau yurisdiksi</p>
-            </div>
-        </div>
-
-        <!-- Slide 12: Rekomendasi Implementasi -->
-        <div class="slide content-slide">
-            <h2>Rekomendasi Implementasi</h2>
-            <h3>Pendekatan Bertahap</h3>
-            <div class="two-column">
-                <div>
-                    <h3>Fase Persiapan</h3>
-                    <ul>
-                        <li>Pengembangan kerangka regulasi terpadu</li>
-                        <li>Koordinasi antar-kementerian</li>
-                        <li>Pembentukan tim kerja multisektoral</li>
-                    </ul>
-                    
-                    <h3>Fase Implementasi</h3>
-                    <ul>
-                        <li>Pilot project pada olahraga berisiko tinggi</li>
-                        <li>Pengembangan infrastruktur medis</li>
-                        <li>Program pelatihan tenaga medis</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Peran Stakeholder</h3>
-                    <ul>
-                        <li><strong>Pemerintah:</strong> Kepemimpinan regulasi dan dukungan finansial</li>
-                        <li><strong>Organisasi Olahraga:</strong> Implementasi standar keselamatan</li>
-                        <li><strong>Atlet:</strong> Kesadaran hak dan akses sistem perlindungan</li>
-                        <li><strong>Tenaga Medis:</strong> Peningkatan kompetensi kedokteran olahraga</li>
+                <div class="content-section">
+                    <h2 class="section-title">Lembaga Peradilan Khusus</h2>
+                    <ul class="content-list">
+                        <li>Pengadilan olahraga atau kamar khusus</li>
+                        <li>Penerapan hukum nasional dan lex sportiva</li>
+                        <li>Koneksi dengan CAS untuk perkara internasional</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 13: Kesimpulan -->
-        <div class="slide content-slide">
-            <h2>Kesimpulan</h2>
-            <div class="conclusion-box">
-                <h3>Temuan Utama</h3>
-                <p>Perlindungan hukum optimal bagi atlet Indonesia memerlukan integrasi sinergis antara jaminan konstitusional hukum nasional dengan standar keselamatan canggih lex sportiva</p>
+        <!-- Slide 12: Rekomendasi -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">REKOMENDASI IMPLEMENTASI</h1>
+                <p class="slide-subtitle">Langkah Strategis ke Depan</p>
             </div>
-            
-            <ul>
-                <li><strong>Dualisme Status Hukum:</strong> Atlet memiliki status ganda sebagai warga negara dan peserta kompetisi internasional yang memerlukan perlindungan dari kedua sistem hukum</li>
-                <li><strong>Complementary Strengths:</strong> Hukum nasional menyediakan jaring pengaman sosial luas, sementara lex sportiva memberikan standar keselamatan spesialisasi</li>
-                <li><strong>Model Integrasi:</strong> Sistem perlindungan terpadu dapat mengatasi kelemahan masing-masing sistem dan memberikan perlindungan komprehensif</li>
-                <li><strong>Implementasi Bertahap:</strong> Diperlukan koordinasi multistakeholder dan pendekatan implementasi yang sistematis</li>
-            </ul>
-        </div>
-
-        <!-- Slide 14: Saran -->
-        <div class="slide content-slide">
-            <h2>Saran dan Rekomendasi</h2>
-            <h3>Untuk Pembuat Kebijakan</h3>
-            <ul>
-                <li>Menyusun undang-undang khusus perlindungan atlet yang mengintegrasikan standar nasional dan internasional</li>
-                <li>Mengembangkan sistem asuransi berlapis dengan partisipasi wajib BPJS dan asuransi tambahan khusus olahraga</li>
-                <li>Membentuk lembaga pengadilan khusus atau kamar khusus olahraga dalam sistem peradilan</li>
-            </ul>
-            
-            <h3>Untuk Organisasi Olahraga</h3>
-            <ul>
-                <li>Mengadopsi dan mengimplementasikan standar keselamatan internasional dalam kompetisi domestik</li>
-                <li>Mengembangkan kemitraan dengan lembaga medis untuk dukungan kedokteran olahraga</li>
-                <li>Meningkatkan kesadaran atlet tentang hak-hak perlindungan hukum</li>
-            </ul>
-        </div>
-
-        <!-- Slide 15: Penutup -->
-        <div class="slide title-slide">
-            <h1>Terima Kasih</h1>
-            <p class="subtitle">Perlindungan Hukum Atlet yang Komprehensif Melalui Integrasi Hukum Nasional dan Lex Sportiva</p>
-            <div class="conclusion-box">
-                <p><strong>"Atlet Indonesia berhak mendapatkan perlindungan hukum yang optimal melalui sinergi antara jaminan konstitusional nasional dan standar keselamatan internasional"</strong></p>
-            </div>
-            <div class="author-info">
-                <p>Diskusi dan Tanya Jawab</p>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h2 class="section-title">Jangka Pendek (1-2 Tahun)</h2>
+                    <ul class="content-list">
+                        <li>Pembentukan komite koordinasi lintas kementerian</li>
+                        <li>Penyusunan draft RUU Perlindungan Atlet</li>
+                        <li>Pilot project untuk cabang olahraga berisiko tinggi</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h2 class="section-title">Jangka Menengah (3-5 Tahun)</h2>
+                    <ul class="content-list">
+                        <li>Implementasi sistem asuransi ganda</li>
+                        <li>Pembangunan pusat kedokteran olahraga</li>
+                        <li>Pelatihan tenaga medis spesialis olahraga</li>
+                        <li>Harmonisasi standar keselamatan</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h2 class="section-title">Jangka Panjang (5+ Tahun)</h2>
+                    <ul class="content-list">
+                        <li>Evaluasi dan penyempurnaan sistem</li>
+                        <li>Ekspansi ke seluruh tingkat kompetisi</li>
+                        <li>Kerjasama internasional yang lebih erat</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>Kunci Sukses:</strong> Koordinasi multi-stakeholder dan komitmen jangka panjang
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Navigation -->
     <div class="navigation">
-        <button class="nav-btn" onclick="previousSlide()">← Sebelumnya</button>
-        <button class="nav-btn" onclick="nextSlide()">Selanjutnya →</button>
-    </div>
-
-    <!-- Slide Counter -->
-    <div class="slide-counter">
-        <span id="current-slide">1</span> / <span id="total-slides">15</span>
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">‹ Sebelumnya</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Selanjutnya ›</button>
     </div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-
+        
         document.getElementById('total-slides').textContent = totalSlides;
 
         function showSlide(n) {
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + totalSlides) % totalSlides;
             slides[currentSlide].classList.add('active');
+            
             document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
         }
 
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
-
-        function previousSlide() {
-            showSlide(currentSlide - 1);
+        function changeSlide(direction) {
+            if (direction === 1 && currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            } else if (direction === -1 && currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
         }
 
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                previousSlide();
-            }
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
         });
 
-        // Auto-advance slides (optional - uncomment to enable)
-        // setInterval(nextSlide, 10000); // Auto-advance every 10 seconds
+        // Initialize
+        showSlide(0);
+
+        // Auto-adjust font size for better mobile experience
+        function adjustFontSize() {
+            const width = window.innerWidth;
+            const slides = document.querySelectorAll('.slide');
+            
+            slides.forEach(slide => {
+                if (width < 768) {
+                    slide.style.fontSize = '0.9rem';
+                } else if (width < 1024) {
+                    slide.style.fontSize = '1rem';
+                } else {
+                    slide.style.fontSize = '1.1rem';
+                }
+            });
+        }
+
+        window.addEventListener('resize', adjustFontSize);
+        adjustFontSize();
     </script>
 </body>
 </html>
